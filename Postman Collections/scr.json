@@ -187,6 +187,67 @@
 			"response": []
 		},
 		{
+			"name": "Get User Details With Wrong Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "57c5060a-b510-4e09-bf90-eabdd6002f8a",
+						"exec": [
+							"const responseJSON = pm.response.json();",
+							"",
+							"// Set global variables for each account",
+							"responseJSON.accounts.forEach(function(account) {",
+							"    pm.globals.set(account.currency + \" account\", account.id);",
+							"});",
+							"",
+							"// Test response status code",
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Test email format",
+							"pm.test(\"Email is in a valid format\", function () {",
+							"  pm.expect(responseJSON.email).to.match(/^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$/, \"Email is not in a valid format\");",
+							"});",
+							"",
+							"// Test mobile phone number format",
+							"pm.test(\"Mobile phone number is in a valid format\", function () {",
+							"  pm.expect(responseJSON.mobile_phone).to.match(/^\\+\\d{2}-\\d{3}-\\d{3}-\\d{2}$/);",
+							"});",
+							"",
+							"// Test the presence of 'accounts' array in the response",
+							"pm.test(\"Verify that the 'accounts' array is present in the response\", function () {",
+							"  pm.expect(responseJSON.accounts).to.exist.and.to.be.an('array');",
+							"});",
+							"",
+							"// Test the expected number of elements in 'accounts' array",
+							"pm.test(\"Verify that the 'accounts' array contains the expected number of elements\", function () {",
+							"  pm.expect(responseJSON.accounts.length).to.equal(3);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "5c1c22fa-af10-4f9d-b945-913b0f18e7a7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": "{{baseURL}}/me"
+			},
+			"response": []
+		},
+		{
 			"name": "Get User Details Without Token",
 			"event": [
 				{
