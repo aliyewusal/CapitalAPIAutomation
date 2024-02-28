@@ -239,7 +239,7 @@
 				"header": [
 					{
 						"key": "x-api-token",
-						"value": "{{token}}",
+						"value": "0977df3e-3e2b-4613-98c4-ea3fcfdddb99",
 						"type": "text"
 					}
 				],
