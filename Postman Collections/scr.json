@@ -113,7 +113,7 @@
 									"",
 									"// Test the expected number of elements in 'accounts' array",
 									"pm.test(\"Verify that the 'accounts' array contains the expected number of elements\", function () {",
-									"  pm.expect(responseJSON.accounts.length).to.equal(3);",
+									"  pm.expect(responseJSON.accounts.length).to.equal(1);",
 									"});"
 								],
 								"type": "text/javascript"
