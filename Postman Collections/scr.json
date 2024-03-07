@@ -145,6 +145,18 @@
 					"response": []
 				},
 				{
+					"name": "New Request",
+					"id": "b048ca5e-2b68-4843-bb37-e8a9813642ec",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
 					"name": "Get User Details",
 					"event": [
 						{
