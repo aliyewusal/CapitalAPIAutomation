@@ -77,6 +77,74 @@
 					"response": []
 				},
 				{
+					"name": "Login Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "747b97df-c622-49cb-b60f-2afeee40f92b",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "2a13de72-9cbd-4303-9313-6884d9ef7a20",
+								"exec": [
+									"// Extract the x-api-token from the response and set it as a global variable",
+									"pm.globals.set(\"token\", pm.response.json()[\"x-api-token\"]);",
+									"",
+									"// Test cases",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response schema is valid\", function () {",
+									"    const schema = {",
+									"        type: \"object\",",
+									"        properties: {",
+									"            \"x-api-token\": { type: \"string\" }",
+									"        },",
+									"        required: [\"x-api-token\"],",
+									"    };",
+									"    ",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;",
+									"});",
+									"",
+									"pm.test(\"The x-api-token length must be greater than zero\", function () {",
+									"    const apiToken = pm.globals.get(\"token\");",
+									"    pm.expect(apiToken.length).to.be.greaterThan(0, \"x-api-token should not be empty\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "687196da-137e-4a9d-96b8-c9a4d444233b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"username\": \"{{testUserName}}\",\n\"password\": \"{{testPassword}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/login"
+					},
+					"response": []
+				},
+				{
 					"name": "Get User Details",
 					"event": [
 						{
